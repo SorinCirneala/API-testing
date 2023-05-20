@@ -60,14 +60,9 @@ def add_item_to_cart(cart_id, item_id) -> Response:
     return requests.post(url, json=payload)
 
 
-
-
-
-print(get_cart_items(mock_cart_id).json())
-# print(add_item_to_cart(mock_cart_id, 5478).json())
-
-# for debugging
-# response = requests.get(url, params=payload)
-# print(response.request.url)
-# print(response.request.body)
-# print(response.request.headers)
+# TODO remove after debugging
+response = add_item_to_cart(mock_cart_id, 5478)
+print(response.text)
+print(response.request.url)
+print(response.request.body)
+print(response.request.headers)
