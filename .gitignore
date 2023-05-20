@@ -1,2 +1,11 @@
+# project specific
+secret.py
+
+
+
+# Python specific
 .pytest_cache
 __pycache__
+
+
+
