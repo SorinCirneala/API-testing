@@ -8,7 +8,7 @@ Grocery store API
 **Initial tests done in Postman:** [Postman colection](https://www.postman.com/sorincirneala/workspace/grocery-store-api-public/collection/22316948-500e3a68-8eb1-4b1f-94c5-a97d7812740c?action=share&creator=22316948)  
 
 API issues: 
-- Get product by ID returns a when request is sent with "product-label=false"
+- Get product by ID response includes a label even if the request is sent with "product-label=false"
 
 
 # First version
