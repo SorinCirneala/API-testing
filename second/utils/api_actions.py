@@ -55,7 +55,7 @@ def add_item_to_cart(cart_id, product_id) -> Response:
     """
     url = f"{carts_url}/{cart_id}/items"
     payload = {
-        "productId": str(product_id) 
+        "productId": f"{product_id}"
     }
     return requests.post(url, json=payload)
 
@@ -73,10 +73,23 @@ def modify_item_in_cart(cart_id, item_id, quantity) -> Response:
     return requests.patch(url, json=payload)
 
 
+def replace_item_in_cart(cart_id, item_id, product_id, quantity) -> Response:
+    """
+    cart_id (string)
+    item_id (int)
+    product_id (int)
+    quantity (int)
+    """
+    url = f"{carts_url}/{cart_id}/items/{item_id}"
+    payload = {
+        "productId": f"{product_id}",
+        "quantity": f"{quantity}"
+    }
+    return requests.put(url, json=payload)
 
 # TODO remove after debugging
-# print(get_cart_info(mock_cart_id).text)
-# response = modify_item_in_cart(mock_cart_id, mock_item_id, 3)
+print(get_cart_info(mock_cart_id).text)
+# response = replace_item_in_cart(mock_cart_id, 620139641, 8554, 2)
 # print(response.text)
 # print(response.request.url)
 # print(response.request.body)
