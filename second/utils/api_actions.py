@@ -87,9 +87,19 @@ def replace_item_in_cart(cart_id, item_id, product_id, quantity) -> Response:
     }
     return requests.put(url, json=payload)
 
+
+def delete_item_in_cart(cart_id, item_id) -> Response:
+    """
+    cart_id (string)
+    item_id (int)
+    """
+    url = f"{carts_url}/{cart_id}/items/{item_id}"
+    return requests.delete(url)
+
+
 # TODO remove after debugging
 print(get_cart_info(mock_cart_id).text)
-# response = replace_item_in_cart(mock_cart_id, 620139641, 8554, 2)
+# response = delete_item_in_cart(mock_cart_id, 153502116)
 # print(response.text)
 # print(response.request.url)
 # print(response.request.body)
