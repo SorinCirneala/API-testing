@@ -1,6 +1,6 @@
 {
     "python.testing.pytestArgs": [
-        "second"
+        "grocery-store-api"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true
