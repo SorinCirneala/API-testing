@@ -30,5 +30,6 @@
 **Initial tests done in Postman:** [Postman colection](https://www.postman.com/sorincirneala/workspace/grocery-store-api-public/collection/22316948-500e3a68-8eb1-4b1f-94c5-a97d7812740c?action=share&creator=22316948)  
 
 ### Discovered issues: 
-1. Get product list does not return status 400 or error message when sending a string or boolean as 'results' parameter
-2. Get product by ID response includes a label even if the request is sent with "product-label=false"
+1. Get product list does not return status 400 or error message when sending a string or boolean as 'results' parameter.
+2. Get product by ID response includes a label even if the request is sent with "product-label=false".
+3. Get product list with 0 results returns 20 results. 

@@ -2,7 +2,9 @@ import sys, os
 project_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_path)
 
+import pytest
 import utils.api_actions as api
+from utils.parametrize import get_testdata
 
 
 def test_products_list_is_returned():
@@ -21,8 +23,8 @@ def test_products_list_has_20_items():
     assert not len(response.json()) < 20, "Product list has less than 20 products"
 
 
-def test_product_list_only_requested_category():
-    # TODO: remove hardcoded value; repeat test case for all available categories
+@pytest.mark.parametrize("category", get_testdata("product_list.json", "test_product_list_only_requested_category"))
+def test_product_list_only_requested_category(category):
     """ Product list should have only items from selected category """
     category = "dairy"
     response = api.get_all_products(category=category)
@@ -31,13 +33,13 @@ def test_product_list_only_requested_category():
         assert item["category"] == category, "Product has incorrect category"
 
 
-def test_product_list_max_result_number():
-    # TODO: remove hardcoded value; repeat test case for all numbers 0 - 20
+@pytest.mark.parametrize("no_of_results", list(range(21)))
+def test_product_list_max_result_number(no_of_results):
+    # expect to fail for 0, check issue #3
     """ Product list should have only the requested number of items """
-    requested_results = 1
-    response = api.get_all_products(max_results=requested_results)
+    response = api.get_all_products(max_results=no_of_results)
     assert response.status_code == 200, "Status code should be 200"
-    assert len(response.json()) <= requested_results, "List length does not match the number of results"
+    assert len(response.json()) <= no_of_results, "List length does not match the number of results"
 
 
 def test_product_list_only_in_stock():
