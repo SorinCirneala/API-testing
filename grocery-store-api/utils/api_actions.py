@@ -4,12 +4,8 @@ sys.path.insert(0, project_path)
 
 import requests
 from requests import Response
-import json
 from utils.endpoints import carts_url, carts_url, orders_url, products_url, register_url, status_url
 from utils.secret import ACCESS_TOKEN
-
-# TODO remove after debugging
-from utils.secret import mock_cart_id, mock_item_id
 
 
 # api actions
@@ -145,11 +141,3 @@ def delete_order(order_id: str) -> Response:
         "Authorization": ACCESS_TOKEN
     }
     return requests.delete(url, headers=headers)
-
-
-# TODO remove after debugging
-# response = get_product_by_id(product_id=4643, with_label="true")
-# print(response.text)
-# print(response.request.url)
-# print(response.request.body)
-# print(response.request.headers)
