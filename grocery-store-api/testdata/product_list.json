@@ -1,0 +1,15 @@
+[
+    {
+        "tc_name": "test_product_list_only_requested_category",
+        "inputs": [
+                "meat-seafood", 
+                "fresh-produce", 
+                "candy", 
+                "bread-bakery", 
+                "dairy", 
+                "eggs", 
+                "coffee",
+                "wrong"
+            ]
+    }
+]
