@@ -4,6 +4,7 @@ sys.path.insert(0, project_path)
 
 import requests
 from requests import Response
+import json
 from utils.endpoints import carts_url, carts_url, orders_url, products_url, register_url, status_url
 from utils.secret import ACCESS_TOKEN
 
@@ -17,14 +18,23 @@ def get_status() -> Response:
     return requests.get(status_url)
 
 
-def get_all_products() -> Response:
-    """ Returns response object with list of products in JSON format """
-    return requests.get(products_url)
+def get_all_products(category: str = None, max_results: int = None, is_available: str = None) -> Response:
+    """ Returns response object with list of products (array of JSON objects / dictionaries) """
+    """ :is_available (str) can be either "true" or "false" """
+    params = {
+        "category": category,
+        "results": max_results,
+        "available": is_available
+    }
+    return requests.get(products_url, params=params)
 
 
-def get_product_by_id(product_id: int, label: bool=None) -> Response:
+def get_product_by_id(product_id: int, with_label: str = None) -> Response:
     """ Returns response object with product details in JSON format """
-    payload = {"product-label": label}
+    """ :with_label (str) can be either "true" or "false" """
+    payload = {
+        "product-label": with_label
+    }
     url = f"{products_url}/{product_id}"
     return requests.get(url, params=payload)
 
@@ -138,9 +148,8 @@ def delete_order(order_id: str) -> Response:
 
 
 # TODO remove after debugging
-# response = delete_order("G97iCYousqdKJgv50eWaX")
+# response = get_product_by_id(product_id=4643, with_label="true")
 # print(response.text)
 # print(response.request.url)
 # print(response.request.body)
 # print(response.request.headers)
-# print(get_order_info("G97iCYousqdKJgv50eWaX").text)
