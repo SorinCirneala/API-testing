@@ -28,7 +28,6 @@ def list_user_tasks(user_id: str) -> requests.Response:
 def delete_task(task_id: str) -> requests.Response:
     return requests.delete(f"{DELETE_TASK_URL}{task_id}")
 
-# TODO refactor to use type hints for all parameters
 def update_task(task_id: str, content=None, is_done=None) -> requests.Response:
     current_data = get_task(task_id).json()
     new_data = {
