@@ -6,6 +6,7 @@ secret.py
 # Python specific
 .pytest_cache
 __pycache__
+area51.py
 
 
 
