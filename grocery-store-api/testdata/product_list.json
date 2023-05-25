@@ -23,7 +23,7 @@
             ]
     },
     {
-        "tc_name": "test_cart_add_product_unavailable",
+        "tc_name": "test_add_product_not_in_stock",
         "inputs": [
                 "5851"
             ]
