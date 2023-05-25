@@ -1,7 +1,8 @@
 # project specific
 secret.py
 
-
+# virtual environment
+.venv
 
 # Python specific
 .pytest_cache
