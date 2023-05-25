@@ -13,13 +13,19 @@
             ]
     }, 
     {
-        "tc_name": "test_cart_add_one_product",
+        "tc_name": "test_add_product_in_stock",
         "inputs": [
                 "4643",
                 "4646", 
                 "4641", 
                 "1709", 
                 "9482"
+            ]
+    },
+    {
+        "tc_name": "test_cart_add_product_unavailable",
+        "inputs": [
+                "5851"
             ]
     }
 ]
