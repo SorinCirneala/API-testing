@@ -28,6 +28,7 @@
 **Test object:** [Simple Grocery API](https://simple-grocery-store-api.glitch.me/)  
 **Specification:** [Github link](https://github.com/vdespa/Postman-Complete-Guide-API-Testing/blob/main/simple-grocery-store-api.md)  
 **Initial tests done in Postman:** [Postman colection](https://www.postman.com/sorincirneala/workspace/grocery-store-api-public/collection/22316948-500e3a68-8eb1-4b1f-94c5-a97d7812740c?action=share&creator=22316948)  
+> To run the tests you need an [access token](https://github.com/vdespa/Postman-Complete-Guide-API-Testing/blob/main/simple-grocery-store-api.md#Register-a-new-API-client). Store it in /utils/secret.py in a string variable ACCESS_TOKEN.
 
 ### Discovered issues: 
 1. Get product list does not return status 400 or error message when sending a string or boolean as 'results' parameter.
