@@ -12,21 +12,21 @@ import utils.api_actions as api
 from utils.parametrize import get_testdata
 
 def test_empty_cart_information():
-    # create cart, save id
+    # create cart, check status
     create_response = api.create_cart()
-    assert create_response.status_code == 201, "Status code should be 201"
+    assert create_response.status_code == 201
 
-    # check each response field
+    # check response content, save id
     cart_json = create_response.json()
-    assert cart_json["created"] == True, "Created should be True"
-    assert type(cart_json["cartId"]) == str, "Cart ID should be a string"
-    assert len(cart_json["cartId"]) > 0, "Card ID length should be bigger than 0"
+    assert cart_json["created"] == True
+    assert type(cart_json["cartId"]) == str
+    assert len(cart_json["cartId"]) > 0
     cart_id = cart_json["cartId"]
 
-    # get cart info, check the item field
+    # get cart info, check the items field
     get_response = api.get_cart_info(cart_id)
-    assert get_response.status_code == 200, "Status code should be 200"
-    assert "items" in get_response.json().keys(), "items key should be in the json response"
+    assert get_response.status_code == 200
+    assert "items" in get_response.json().keys()
     
     
 @pytest.mark.parametrize("product_id", get_testdata("product_list.json", "test_add_product_in_stock"))
@@ -53,29 +53,45 @@ def test_add_product_in_stock(product_id):
 def test_add_product_more_than_current_stock(product_id):
     # create cart, save id
     create_response = api.create_cart()
-    assert create_response.status_code == 201, "Status code should be 201"
+    assert create_response.status_code == 201
     cart_id = create_response.json()["cartId"]
 
     # add item with very large quantity, check error message
     add_response = api.add_item_to_cart(cart_id, product_id, 300)
-    assert add_response.status_code == 400, "Status code should be 400"
-    assert add_response.json()["error"] == "The quantity requested exceeds the current stock.", "Incorrect error text"
+    assert add_response.status_code == 400
+    assert add_response.json()["error"] == "The quantity requested exceeds the current stock."
     
     # get cart, items field should be empty, no product added
     cart_info_response = api.get_cart_items(cart_id)
-    assert cart_info_response.status_code == 200, "Status code should be 200"
+    assert cart_info_response.status_code == 200
+    assert len(cart_info_response.json()) == 0
+
+
+@pytest.mark.parametrize("product_id", get_testdata("product_list.json", "test_add_product_not_in_stock"))
+def test_add_product_not_in_stock(product_id):
+    # create cart, save id
+    create_response = api.create_cart()
+    assert create_response.status_code == 201
+    cart_id = create_response.json()["cartId"]
+
+    # add item that is not in stock, check the error
+    add_response = api.add_item_to_cart(cart_id, product_id)
+    assert add_response.status_code == 400
+    assert add_response.json()["error"] == "This product is not in stock and cannot be ordered."
+    
+    # get cart, items field should be empty, product not added
+    cart_info_response = api.get_cart_items(cart_id)
+    assert cart_info_response.status_code == 200
     assert len(cart_info_response.json()) == 0
 
 
 # TODO write tests
 """ create cart, add 1 product NOT in stock, check error message & cart content """
-
 """ create cart, add 1 product, valid quantity, check cart content """
 """ create cart, add 1 product invalid quantity (bigger than stock), check error & cart content """
-
 """ cart with n products, change quantity """
 
 
-# need more info
-""" add product, add maximum products, check cart content - max not defined"""
-""" add product, add maximum + 1 products, check error - max not defined"""
+# need more info - max not defined
+""" add product, add maximum products, check cart content """
+""" add product, add maximum + 1 products, check error """
