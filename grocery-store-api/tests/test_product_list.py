@@ -96,6 +96,6 @@ def test_product_list_results_wrong_value():
 
 
 # TODO: add more test cases
-""" combine category with results """
-""" combine category with available """
-""" combine results with available """
+""" mix category with results """
+""" mix category with available """
+""" mix results with available """
