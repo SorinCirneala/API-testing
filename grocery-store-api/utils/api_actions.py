@@ -52,11 +52,12 @@ def get_cart_items(cart_id: str) -> Response:
     return requests.get(url)
 
 
-def add_item_to_cart(cart_id: str, product_id: int) -> Response:
+def add_item_to_cart(cart_id: str, product_id: int, quantity: int = None) -> Response:
     """ Returns response object with add confirmation in JSON format """
     url = f"{carts_url}/{cart_id}/items"
     payload = {
-        "productId": f"{product_id}"
+        "productId": f"{product_id}", 
+        "quantity": f"{quantity}"
     }
     return requests.post(url, json=payload)
 
